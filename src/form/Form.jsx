@@ -1,43 +1,63 @@
 import { useReducer, useState } from 'react';
 import './form.css';
 
+
+const ACTION = {
+    ADD: 'ADD',
+    DELETE: 'DELETE',
+    SET_STORE_VALUE:'SET_STORE_VALUE',
+    SET_PRODUCT_NAME:"SET_PRODUCT_NAME"
+}
+
+function reducer(state, action) {
+
+    switch (action.type) {
+        case ACTION.ADD:
+            return {...state,stores:[...state.stores,'']}
+
+        case ACTION.DELETE:
+            state.stores.splice(action.payload.index,1)
+            return {...state};
+        case ACTION.SET_STORE_VALUE:
+             state.stores[action.payload.index]=action.payload.value;
+             return {...state};
+        case ACTION.SET_PRODUCT_NAME:
+            state.product=action.payload.value;
+            return {...state}     
+        default:
+            return state;
+    }
+
+}
+
 function Form() {
-    const [formData, setFormData] = useState({ product: '', stores: [''] })
+
+    const [formData, setFormData] = useReducer(reducer, { product: '', stores: [''] })
 
 
     function submitFormFn(e) {
-        e.preventDefault()
-        console.log(formData)
+        // e.preventDefault()
+        // console.log(formData)
     }
     function addStoreFn(e) {
-        e.preventDefault();
-        if (formData.stores.length >= 3) return false;
-        setFormData((previousState) => {
-            return { product: previousState.product, stores: [...previousState.stores, ''] }
-        })
-        console.log(formData)
+        e.preventDefault()
+        setFormData({ type: ACTION.ADD })
+    }
+    function deleteFn(e, index) {
+        e.preventDefault()
+         if (formData.stores.length < 2) return false;
+         setFormData({type:ACTION.DELETE,payload:{index:index}})
     }
 
     function setStoreValue(index, event) {
-        let stores = [...formData.stores];
-        stores[index] = event.target.value;
-        setFormData({ ...formData, stores })
+        setFormData({type:ACTION.SET_STORE_VALUE,payload:{index:index,value:event.target.value}})
     }
 
 
     function setProductNameFn(e) {
-        setFormData({ ...formData, product: e.target.value })
+        setFormData({type:ACTION.SET_PRODUCT_NAME,payload:{value:e.target.value}})
     }
 
-    function deleteFn(e, index) {
-        console.log(index)
-        e.preventDefault()
-        if (formData.stores.length < 2) return false;
-        formData.stores.splice(index, 1)
-        console.log(formData)
-        setFormData({ ...formData })
-
-    }
 
     return (
         <>
