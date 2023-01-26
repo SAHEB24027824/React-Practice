@@ -1,0 +1,61 @@
+.page_container{
+    width: 40%;
+    margin: 20px auto auto auto;
+    text-align: center;
+    padding: 20px;
+}
+
+.users_container{
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+}
+.user_container{
+    padding: 20px;
+    border: 1px solid;
+    width: 30%;
+    margin: 10px;
+    list-style: none;
+    border-radius: 5px;
+}
+.btn{
+    border: 1px solid;
+    text-align: center;
+    padding: 10px;
+    margin-top: 10px;
+    text-decoration: none;
+    background-color: rgb(35, 105, 209);
+    display: block;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+.btnLink{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.btnSearchParam{
+    background:transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+
+.nameFormControl{
+    padding: 10px;
+    width: 80%;
+    margin: 5px;
+}
+.catFormControl{
+    padding: 10px;
+    width: 50%;
+    margin: 5px;
+}
+.catField{
+    display: flex;
+}
